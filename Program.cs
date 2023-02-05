@@ -46,8 +46,8 @@ string NumberIntoLongText(long number)
     const string MILLION = "million";
 
 
-    string numberUnderHundred=string.Empty;
-    
+    string numberUnderHundred = string.Empty;
+
     string CompileANumber(long number, long divisor, string size)
     {
         string compiledNumber = NumberIntoLongText(number / divisor) + size + NumberIntoLongText(number % divisor);
@@ -77,7 +77,7 @@ string NumberIntoLongText(long number)
         }
         else
         {
-            if (number < 30) { numberUnderHundred=TWENTY; }
+            if (number < 30) { numberUnderHundred = TWENTY; }
             else if (number < 40) { numberUnderHundred = THIRTY; }
             else if (number < 50) { numberUnderHundred = FOURTY; }
             else if (number < 60) { numberUnderHundred = FIFTY; }
@@ -92,41 +92,20 @@ string NumberIntoLongText(long number)
         return numberUnderHundred;
     }
 
-    string NumbersUnder1000(long number) { return CompileANumber(number, 100, HUNDRED); }
-
-    string NumbersUnder10Thousand(long number) { return CompileANumber(number, 1000, THOUSAND); }
-
-    string NumbersUnder100Thousand(long number) { return CompileANumber(number, 1000, THOUSAND); }
-
-    string NumbersUnderOneMillion(long number) { return CompileANumber(number, 1000, THOUSAND); }
-
-    string NumbersUnder10Million(long number) { return CompileANumber(number, 1000000, MILLION); }
-
-    string NumbersUnder100Million(long number)  { return CompileANumber(number, 1000000, MILLION); }
- 
-    string NumbersUnderOneMilliard(long number) { return CompileANumber(number, 1000000, MILLION); }
-        
 
     if (number < 0) { number *= -1; numberInText += MINUS; }
 
     if (number < 100) { numberInText += NumbersUnder100(number); }
-    else if (number < 1000) { numberInText += NumbersUnder1000(number); }
-    else if (number < 10000) { numberInText += NumbersUnder10Thousand(number); }
-    else if (number < 100000) { numberInText += NumbersUnder100Thousand(number); }
-    else if (number < 1000000) { numberInText += NumbersUnderOneMillion(number); }
-    else if (number < 10000000) { numberInText += NumbersUnder10Million(number); }
-    else if (number < 100000000) { numberInText += NumbersUnder100Million(number); }
-    else if (number < 1000000000) { numberInText += NumbersUnderOneMilliard(number); }
+    else if (number < 1000) { numberInText += CompileANumber(number, 100, HUNDRED); }
+    else if (number < 10000) { numberInText += CompileANumber(number, 1000, THOUSAND); }
+    else if (number < 100000) { numberInText += CompileANumber(number, 1000, THOUSAND); }
+    else if (number < 1000000) { numberInText += CompileANumber(number, 1000, THOUSAND); }
+    else if (number < 10000000) { numberInText += CompileANumber(number, 1000000, MILLION); }
+    else if (number < 100000000) { numberInText += CompileANumber(number, 1000000, MILLION); }
+    else if (number < 1000000000) { numberInText += CompileANumber(number, 1000000, MILLION); }
 
-    while (numberInText.Contains("zero") || numberInText.Contains("zerothousand") || numberInText.Contains("zerohundred") || numberInText.Contains("onemilliononemillion") || numberInText.Contains("millionthousand"))
-    {
-        if (numberInText.Contains("onemilliononemillion")) { numberInText = numberInText.Replace("onemilliononemillion", ""); }
-        if (numberInText.Contains("zerohundred")) { numberInText = numberInText.Replace("zerohundred", ""); }
-        if (numberInText.Contains("millionthousand")) { numberInText = numberInText.Replace("millionthousand", ""); }
-        if (numberInText.Contains("zerothousand")) { numberInText = numberInText.Replace("zerothousand", ""); }
         if (numberInText.Contains("zero")) { numberInText = numberInText.Replace("zero", ""); }
-    }
-
+    
     return numberInText;
 }
 
@@ -148,12 +127,12 @@ void RunNumberFormatter()
 
         if (isDigit)
         {
-            if (number > 0) { if (number > MAX ) { Console.WriteLine(INVALID_INPUT); } }
-            else { if (number <MAX * -1) { Console.WriteLine(INVALID_INPUT); } }
+            if (number > 0) { if (number > MAX) { Console.WriteLine(INVALID_INPUT); } }
+            else { if (number < MAX * -1) { Console.WriteLine(INVALID_INPUT); } }
             if (number > 0 && number < 10) { Console.WriteLine(DigitIntoLongText(number)); }
-            else if(number >=MAX*-1&&number <= MAX) { Console.WriteLine(NumberIntoLongText(number)); }
+            else if (number >= MAX * -1 && number <= MAX) { Console.WriteLine(NumberIntoLongText(number)); }
         }
-        else if (!isDigit){ Console.WriteLine("not a digit"); }
+        else if (!isDigit) { Console.WriteLine("not a digit"); }
 
     }
 }
