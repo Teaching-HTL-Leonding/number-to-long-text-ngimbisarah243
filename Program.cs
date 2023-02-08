@@ -131,7 +131,7 @@ void RunNumberFormatter()
             else { if (number < MAX * -1) { Console.WriteLine(INVALID_INPUT); } }
 
             Console.ForegroundColor= ConsoleColor.Magenta;
-            if (number > 0 && number < 10) { Console.WriteLine(DigitIntoLongText(number)); }
+            if (number >= 0 && number < 10) { Console.WriteLine(DigitIntoLongText(number)); }
             else if (number >= MAX * -1 && number <= MAX)
             {
                 Console.WriteLine(NumberIntoLongText(number));
